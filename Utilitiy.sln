@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.General", "Utility.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Memory", "Utility.Memory\Utility.Memory.csproj", "{F2285E15-EACE-4932-9F42-EEE6E8B83910}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility.Input", "Utility.Input\Utility.Input.csproj", "{8CC6D278-5B29-4373-A40E-55F6706BE814}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{F2285E15-EACE-4932-9F42-EEE6E8B83910}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2285E15-EACE-4932-9F42-EEE6E8B83910}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2285E15-EACE-4932-9F42-EEE6E8B83910}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8CC6D278-5B29-4373-A40E-55F6706BE814}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8CC6D278-5B29-4373-A40E-55F6706BE814}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8CC6D278-5B29-4373-A40E-55F6706BE814}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8CC6D278-5B29-4373-A40E-55F6706BE814}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

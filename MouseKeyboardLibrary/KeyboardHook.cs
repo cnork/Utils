@@ -21,9 +21,7 @@ namespace MouseKeyboardLibrary
 
         public KeyboardHook()
         {
-
             _hookType = WH_KEYBOARD_LL;
-
         }
 
         #endregion

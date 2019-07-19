@@ -56,6 +56,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalHook.cs" />
+    <Compile Include="Hotkeys\Hotkey.cs" />
+    <Compile Include="Hotkeys\HotkeyHook.cs" />
     <Compile Include="KeyboardHook.cs" />
     <Compile Include="KeyboardSimulator.cs" />
     <Compile Include="MouseHook.cs" />
