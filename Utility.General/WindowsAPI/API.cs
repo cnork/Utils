@@ -18,11 +18,14 @@ namespace Utility.General.WindowsAPI
         private static extern IntPtr GetForegroundWindow();
 
         [DllImport("user32.dll")]
-        private static extern Int32 GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
+        static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        [DllImport("user32.dll")]
+        private static extern int GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
 
         #region Fields
 
-        private static Bitmap screenPixel = new Bitmap(1, 1, PixelFormat.Format32bppArgb);
+        private static readonly Bitmap ScreenPixel = new Bitmap(1, 1, PixelFormat.Format32bppArgb);
 
         #endregion
 
@@ -35,19 +38,19 @@ namespace Utility.General.WindowsAPI
 
         public static Color GetColorAt(Point location)
         {
-            using (Graphics gdest = Graphics.FromImage(screenPixel))
+            using (var gdest = Graphics.FromImage(ScreenPixel))
             {
-                using (Graphics gsrc = Graphics.FromHwnd(IntPtr.Zero))
+                using (var gsrc = Graphics.FromHwnd(IntPtr.Zero))
                 {
-                    IntPtr hSrcDC = gsrc.GetHdc();
-                    IntPtr hDC = gdest.GetHdc();
-                    int retval = BitBlt(hDC, 0, 0, 1, 1, hSrcDC, location.X, location.Y, (int)CopyPixelOperation.SourceCopy);
+                    var hSrcDC = gsrc.GetHdc();
+                    var hDC = gdest.GetHdc();
+                    var retval = BitBlt(hDC, 0, 0, 1, 1, hSrcDC, location.X, location.Y, (int)CopyPixelOperation.SourceCopy);
                     gdest.ReleaseHdc();
                     gsrc.ReleaseHdc();
                 }
             }
 
-            return screenPixel.GetPixel(0, 0);
+            return ScreenPixel.GetPixel(0, 0);
         }
 
         public static Point GetCursorPoint()
@@ -59,12 +62,10 @@ namespace Utility.General.WindowsAPI
 
         public static string GetForegroundProcessName()
         {
-            IntPtr hwnd = GetForegroundWindow();
+            var hwnd = GetForegroundWindow();
+            GetWindowThreadProcessId(hwnd, out var pid);
 
-            uint pid;
-            GetWindowThreadProcessId(hwnd, out pid);
-
-            foreach (System.Diagnostics.Process p in System.Diagnostics.Process.GetProcesses())
+            foreach (var p in Process.GetProcesses())
             {
                 if (p.Id == pid)
                     return p.ProcessName;
@@ -75,8 +76,8 @@ namespace Utility.General.WindowsAPI
 
         public static IntPtr GetWindowHandle(string appName)
         {
-            IntPtr windowHandle = IntPtr.Zero;
-            Process[] processes = Process.GetProcessesByName(appName);
+            var windowHandle = IntPtr.Zero;
+            var processes = Process.GetProcessesByName(appName);
 
             if (processes.Length > 0)
                 windowHandle = processes[0].MainWindowHandle;
